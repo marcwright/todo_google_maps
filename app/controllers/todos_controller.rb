@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo, only: [:show, :edit, :update, :destroy, :toggle_completed, :assigned]
   before_action :signed_in_user
+  before_action :verify_correct_user, only: [:show, :edit, :update, :destroy]
 
   # GET /todos
   # GET /todos.json
@@ -75,6 +76,18 @@ class TodosController < ApplicationController
     end
   end
 
+  def assigned
+    @todo.assigned = !@todo.assigned
+    respond_to do |format|
+      if @todo.save
+        format.html { redirect_to todos_path }
+        format.json { render :show, status: :ok, location: @todo }
+      else
+        # show some error message
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
@@ -83,6 +96,11 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:title, :completed)
+      params.require(:todo).permit(:title, :completed, :due_date)
     end
+
+    def verify_correct_user
+       @todo = current_user.todos.find_by(id: params[:id])
+       redirect_to root_url, notice: 'Access Denied!' if @todo.nil?
+     end
 end
