@@ -8,9 +8,9 @@ class Assignee < ActiveRecord::Base
     assignee_coords_array = []
 
     assignees.each do |assignee|
-      street = assignee.address.gsub(' ', '+') || '477 wilmer st ne'
-      city   = assignee.city.gsub(' ', '+') || 'atlanta'
-      state  = assignee.state || 'ga'
+      street = assignee.address.gsub(' ', '+')
+      city   = assignee.city.gsub(' ', '+')
+      state  = assignee.state
 
       data = HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY"
 
