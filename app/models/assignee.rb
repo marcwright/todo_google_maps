@@ -5,7 +5,7 @@ class Assignee < ActiveRecord::Base
   def self.get_coords
     assignees = Assignee.all
 
-    coords = []
+    assignee_coords_array = []
 
     url = 'https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY'
 
@@ -16,13 +16,13 @@ class Assignee < ActiveRecord::Base
 
       data = HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY"
 
-      ass_lon = data["results"][0]["geometry"]["location"]["lng"]
-      ass_lat = data["results"][0]["geometry"]["location"]["lat"]
+      assignee_lon = data["results"][0]["geometry"]["location"]["lng"]
+      assignee_lat = data["results"][0]["geometry"]["location"]["lat"]
 
-      coords << [ass_lat, ass_lon]
-      
+      assignee_coords_array << {"lat" => assignee_lat, "lng" => assignee_lon}      
     end
-    coords
+    
+    assignee_coords_array
   end
 
 end

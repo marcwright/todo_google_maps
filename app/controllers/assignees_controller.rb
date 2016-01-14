@@ -10,6 +10,10 @@ class AssigneesController < ApplicationController
   # GET /assignees/1
   # GET /assignees/1.json
   def show
+    # @lat = 33.862100
+    # @lng = -84.687900
+    @assignee_coords_array = Assignee.get_coords
+    # @assignee_coords_array = assignee_coords_array.gsub("&quot;", "")
   end
 
   # GET /assignees/new
