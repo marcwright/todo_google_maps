@@ -1,0 +1,39 @@
+<div class="page-header">
+  <%= link_to new_assignee_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Assignee
+  <% end %>
+  <h1>Listing assignees</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Phone</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @assignees) do |assignee| %>
+            <td><%= assignee.name %></td>
+            <td><%= assignee.address %></td>
+            <td><%= assignee.city %></td>
+            <td><%= assignee.state %></td>
+            <td><%= assignee.zip %></td>
+            <td><%= assignee.phone %></td>
+            <td><%= link_to 'Show', assignee %></td>
+        <td><%= link_to 'Edit', edit_assignee_path(assignee) %></td>
+        <td><%= link_to 'Destroy', assignee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

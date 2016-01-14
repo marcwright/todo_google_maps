@@ -11,19 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113221958) do
+ActiveRecord::Schema.define(version: 20160114015954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "todos", force: :cascade do |t|
-    t.string   "title",      null: false
-    t.boolean  "completed",  null: false
+  create_table "assignees", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.integer  "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id",    null: false
+    t.integer  "user_id"
+  end
+
+  add_index "assignees", ["user_id"], name: "index_assignees_on_user_id", using: :btree
+
+  create_table "todos", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.boolean  "completed",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id",     null: false
     t.date     "due_date"
     t.boolean  "assigned"
+    t.integer  "assignee_id"
   end
 
   add_index "todos", ["user_id"], name: "index_todos_on_user_id", using: :btree
@@ -41,5 +56,6 @@ ActiveRecord::Schema.define(version: 20160113221958) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "assignees", "users"
   add_foreign_key "todos", "users"
 end

@@ -1,5 +1,6 @@
 class Todo < ActiveRecord::Base
   belongs_to :user
+  belongs_to :assignee
   validates :title, presence: true
 
   before_save :default_values

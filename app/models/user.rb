@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  has_many :assignees, through: :todos
   has_many :todos, dependent: :destroy
 
   before_save { email.downcase! }

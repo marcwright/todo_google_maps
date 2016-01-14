@@ -14,6 +14,7 @@
         <th>Due Date</th>
         <th>Completed</th>
         <th>Assigned</th>
+        <th>Assignee</th>
         <th>Show</th>
         <th>Edit</th>
         <th>Destroy</th>
@@ -43,6 +44,10 @@
                   <span class="glyphicon glyphicon-unchecked"></span>
                 <% end %>
               <% end %>
+            </td>
+
+            <td>
+              <%= todo.assignee ? todo.assignee.name : "Assign Someone!" %>
             </td>
             <td><%= link_to 'Show', todo %></td>
         <td><%= link_to 'Edit', edit_todo_path(todo) %></td>

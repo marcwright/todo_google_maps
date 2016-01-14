@@ -96,11 +96,11 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:title, :completed, :due_date)
+      params.require(:todo).permit(:title, :completed, :due_date, :assignee_id, :user_id)
     end
 
     def verify_correct_user
-       @todo = current_user.todos.find_by(id: params[:id])
-       redirect_to root_url, notice: 'Access Denied!' if @todo.nil?
-     end
+      @todo = current_user.todos.find_by(id: params[:id])
+      redirect_to root_url, notice: 'Access Denied!' if @todo.nil?
+    end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :assignees
   resources :sessions, only:[:new, :create, :destroy]
 
   match '/signup',  to: 'users#new',            via: 'get'
