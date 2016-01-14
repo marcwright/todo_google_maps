@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'httparty'
 gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'bootstrap-generators', '~> 3.3.4'
