@@ -2,17 +2,15 @@ class Assignee < ActiveRecord::Base
   has_many :users, through: :todos
   has_many :todos
 
-  def self.get_coords
+  def self.get_assignee_coords
     assignees = Assignee.all
 
     assignee_coords_array = []
 
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY'
-
     assignees.each do |assignee|
-      street = assignee.address.gsub(' ', '+')
-      city   = assignee.city.gsub(' ', '+')
-      state  = assignee.state
+      street = assignee.address.gsub(' ', '+') || '477 wilmer st ne'
+      city   = assignee.city.gsub(' ', '+') || 'atlanta'
+      state  = assignee.state || 'ga'
 
       data = HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY"
 

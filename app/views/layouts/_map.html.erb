@@ -7,7 +7,8 @@
       // var lat = <%= @lat %>
       // var lng = <%= @lng %>
       var assignee_coords = <%= @assignee_coords_array.to_json.html_safe %>;
-      console.log(assignee_coords);
+      var todo_coords = <%= @todo_coords_array.to_json.html_safe %>;
+      console.log("assignee coords:" + assignee_coords + " todo coords:" + todo_coords);
       handler = Gmaps.build('Google');
       
       handler.buildMap({
@@ -19,7 +20,7 @@
         }, 
 
         function(){
-          var markers = handler.addMarkers(assignee_coords);
+          markers = handler.addMarkers(assignee_coords);
         
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();

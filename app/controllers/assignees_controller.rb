@@ -5,13 +5,13 @@ class AssigneesController < ApplicationController
   # GET /assignees.json
   def index
     @assignees = Assignee.all
-    @assignee_coords_array = Assignee.get_coords
+    @assignee_coords_array = Assignee.get_assignee_coords
   end
 
   # GET /assignees/1
   # GET /assignees/1.json
   def show
-    @assignee_coords_array = Assignee.get_coords
+    @assignee_coords_array = Assignee.get_assignee_coords
   end
 
   # GET /assignees/new

@@ -7,6 +7,8 @@ class TodosController < ApplicationController
   # GET /todos.json
   def index
     @todos = current_user.todos.order(created_at: :desc)
+    @assignee_coords_array = Assignee.get_assignee_coords
+    @todo_coords_array = Todo.get_todo_coords
   end
 
   # GET /todos/1
@@ -96,7 +98,7 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:title, :completed, :due_date, :assignee_id, :user_id)
+      params.require(:todo).permit(:title, :completed, :due_date, :assignee_id, :user_id, :business_name, :street, :city, :state, :zip)
     end
 
     def verify_correct_user
