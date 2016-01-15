@@ -11,10 +11,6 @@
     <thead>
       <tr>
             <th>Name</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
             <th>Phone</th>
             <th></th>
         <th></th>
@@ -24,13 +20,9 @@
 
     <tbody>
       <%= content_tag_for(:tr, @assignees) do |assignee| %>
-            <td><%= assignee.name %></td>
-            <td><%= assignee.address %></td>
-            <td><%= assignee.city %></td>
-            <td><%= assignee.state %></td>
-            <td><%= assignee.zip %></td>
+            <td><%= link_to assignee.name, assignee %></td>
             <td><%= assignee.phone %></td>
-            <td><%= link_to 'Show', assignee %></td>
+            
         <td><%= link_to 'Edit', edit_assignee_path(assignee) %></td>
         <td><%= link_to 'Destroy', assignee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

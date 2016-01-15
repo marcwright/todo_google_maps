@@ -15,7 +15,6 @@
         <th>Completed</th>
         <th>Assigned</th>
         <th>Assignee</th>
-        <th>Show</th>
         <th>Edit</th>
         <th>Destroy</th>
         <th></th>
@@ -25,7 +24,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @todos) do |todo| %>
-            <td><%= todo.title %></td>
+            <td><%= link_to todo.title, todo %></td>
             <td><%= todo.due_date %></td>
             <td>
               <%= link_to("/todos/#{todo.id}/toggle_completed") do %>
@@ -49,7 +48,7 @@
             <td>
               <%= todo.assignee ? todo.assignee.name : "Assign Someone!" %>
             </td>
-            <td><%= link_to 'Show', todo %></td>
+            
         <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
         <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
