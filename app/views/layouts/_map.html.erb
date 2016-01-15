@@ -6,19 +6,19 @@
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 33.7550, lng: -84.3900},
-    zoom: 15
-  });
+  function initMap() {
 
-  var coords = <%= @coords_array.to_json.html_safe %>
-  // var myLatLng = {lat: 33.8459, lng: -84.3619};
-  console.log(coords);
+    var pos;
 
-    
-  var infoWindow = new google.maps.InfoWindow({map: map});
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: pos,
+      zoom: 15
+    });
 
+    var coords = <%= @coords_array.to_json.html_safe %>
+    console.log(coords);
+      
+    var infoWindow = new google.maps.InfoWindow({map: map});
 
     for (var i = 0; i < coords.length; i++) {
         var data = coords[i];
@@ -37,7 +37,7 @@ function initMap() {
             title: data.name,
             icon: icon_color
         });
-        
+          
         //Attach click event to the marker.
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
@@ -46,39 +46,37 @@ function initMap() {
                 infoWindow.open(map, marker);
             });
         })(marker, data);
+      }
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        infoWindow.setPosition(pos);
+        infoWindow.setContent("<div style = 'width:75px;min-height:10px;color:black'>You are Here</div>");
+        map.setCenter(pos);
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
     }
-
-
-
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('You are here Schmitty!');
-      map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
   }
-}
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-}
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+  }
 
-    </script>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY&signed_in=true&callback=initMap"
-        async defer>
-    </script>
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY&signed_in=true&callback=initMap"
+  async defer>
+</script>
