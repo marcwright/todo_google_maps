@@ -12,41 +12,40 @@ function initMap() {
     zoom: 10
   });
 
-  var assignee_coords = <%= @assignee_coords_array.to_json.html_safe %>
-  var todo_coords = <%= @todo_coords_array.to_json.html_safe %>
-
-  var coords = assignee_coords.concat(todo_coords);
+  var coords = <%= @coords_array.to_json.html_safe %>
   // var myLatLng = {lat: 33.8459, lng: -84.3619};
   console.log(coords);
 
-      // var marker = new google.maps.Marker({
-      //   position: myLatLng,
-      //   map: map,
-      //   title: 'Marcus'
-      // });
-
+    
   var infoWindow = new google.maps.InfoWindow({map: map});
 
 
     for (var i = 0; i < coords.length; i++) {
         var data = coords[i];
         var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+        var icon_color;
+
+           if (data.what == "assignee") {
+               icon_color = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            } else {
+               icon_color = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' 
+            };            
+
         var marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
             title: data.name,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            icon: icon_color
         });
-        // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-
+        
         //Attach click event to the marker.
-        // (function (marker, data) {
-        //     google.maps.event.addListener(marker, "click", function (e) {
-        //         //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-        //         infoWindow.setContent("<div style = 'width:200px;min-height:40px'>" + data.description + "</div>");
-        //         infoWindow.open(map, marker);
-        //     });
-        // })(marker, data);
+        (function (marker, data) {
+            google.maps.event.addListener(marker, "click", function (e) {
+                //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                infoWindow.setContent("<div style = 'width:200px;min-height:40px;color:black'>" + data.name + "</div>");
+                infoWindow.open(map, marker);
+            });
+        })(marker, data);
     }
 
 

@@ -7,8 +7,7 @@ class TodosController < ApplicationController
   # GET /todos.json
   def index
     @todos = current_user.todos.order(created_at: :desc)
-    @assignee_coords_array = Assignee.get_assignee_coords
-    @todo_coords_array = Todo.get_todo_coords
+    @coords_array = (Assignee.get_assignee_coords).concat(Todo.get_todo_coords)
   end
 
   # GET /todos/1

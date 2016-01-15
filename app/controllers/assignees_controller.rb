@@ -5,8 +5,7 @@ class AssigneesController < ApplicationController
   # GET /assignees.json
   def index
     @assignees = Assignee.all
-    @assignee_coords_array = Assignee.get_assignee_coords
-    @todo_coords_array = Todo.get_todo_coords
+    @coords_array = (Assignee.get_assignee_coords).concat(Todo.get_todo_coords)
   end
 
   # GET /assignees/1
