@@ -11,13 +11,14 @@ class Assignee < ActiveRecord::Base
       street = assignee.address.gsub(' ', '+')
       city   = assignee.city.gsub(' ', '+')
       state  = assignee.state
+      name   = assignee.name
 
       data = HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY"
 
       assignee_lon = data["results"][0]["geometry"]["location"]["lng"]
       assignee_lat = data["results"][0]["geometry"]["location"]["lat"]
 
-      assignee_coords_array << {"lat" => assignee_lat, "lng" => assignee_lon}      
+      assignee_coords_array << {"lat" => assignee_lat, "lng" => assignee_lon, "name" => name}      
     end
     
     assignee_coords_array

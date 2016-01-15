@@ -8,10 +8,45 @@
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 6
+    center: {lat: 33.7550, lng: -84.3900},
+    zoom: 8
   });
+
+  var coords = <%= @assignee_coords_array.to_json.html_safe %>
+  // var myLatLng = {lat: 33.8459, lng: -84.3619};
+  console.log(coords);
+
+      // var marker = new google.maps.Marker({
+      //   position: myLatLng,
+      //   map: map,
+      //   title: 'Marcus'
+      // });
+
   var infoWindow = new google.maps.InfoWindow({map: map});
+
+
+    for (var i = 0; i < coords.length; i++) {
+        var data = coords[i];
+        var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: data.name,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        });
+        // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+        //Attach click event to the marker.
+        // (function (marker, data) {
+        //     google.maps.event.addListener(marker, "click", function (e) {
+        //         //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+        //         infoWindow.setContent("<div style = 'width:200px;min-height:40px'>" + data.description + "</div>");
+        //         infoWindow.open(map, marker);
+        //     });
+        // })(marker, data);
+    }
+
+
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -22,7 +57,7 @@ function initMap() {
       };
 
       infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
+      infoWindow.setContent('You are here Schmitty!');
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -41,35 +76,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
     </script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY&signed_in=true&callback=initMap"
         async defer>
     </script>
-
-
-
-//     <script type="text/javascript">
-//   $(function() {
-//       // var lat = <%= @lat %>
-//       // var lng = <%= @lng %>
-//       var assignee_coords = <%= @assignee_coords_array.to_json.html_safe %>;
-//       var todo_coords = <%= @todo_coords_array.to_json.html_safe %>;
-//       console.log("assignee coords:" + assignee_coords + " todo coords:" + todo_coords);
-//       handler = Gmaps.build('Google');
-      
-//       handler.buildMap({
-//           provider: {
-//             disableDefaultUI: false
-//             // pass in other Google Maps API options here
-//           },
-//           internal: {id: 'multi_markers'}
-//         }, 
-
-//         function(){
-//           var markers = handler.addMarkers(assignee_coords);
-        
-//           handler.bounds.extendWith(markers);
-//           handler.fitMapToBounds();
-//         }
-//       );
-//   });
-// </script>
