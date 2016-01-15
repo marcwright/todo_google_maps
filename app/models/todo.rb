@@ -14,13 +14,14 @@ class Todo < ActiveRecord::Base
       street = todo.street.gsub(' ', '+')
       city   = todo.city.gsub(' ', '+')
       state  = todo.state
+      title  = todo.title
 
       data = HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{street},+#{city},+#{state}&key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY"
 
       todo_lon = data["results"][0]["geometry"]["location"]["lng"]
       todo_lat = data["results"][0]["geometry"]["location"]["lat"]
 
-      todo_coords_array << {"lat" => todo_lat, "lng" => todo_lon}      
+      todo_coords_array << {"lat" => todo_lat, "lng" => todo_lon, "name" => title}      
     end
     
     todo_coords_array

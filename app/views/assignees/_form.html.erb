@@ -48,6 +48,7 @@
       <%= f.telephone_field :phone, class: "form-control" %>
     </div>
   </div>
+  <%= f.hidden_field :what, value: "assignee" %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit class: "btn btn-primary" %>

@@ -6,6 +6,7 @@ class AssigneesController < ApplicationController
   def index
     @assignees = Assignee.all
     @assignee_coords_array = Assignee.get_assignee_coords
+    @todo_coords_array = Todo.get_todo_coords
   end
 
   # GET /assignees/1
@@ -71,6 +72,6 @@ class AssigneesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignee_params
-      params.require(:assignee).permit(:name, :address, :city, :state, :zip, :phone)
+      params.require(:assignee).permit(:name, :address, :city, :state, :zip, :phone, :what)
     end
 end
