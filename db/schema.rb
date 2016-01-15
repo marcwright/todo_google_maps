@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115170953) do
+ActiveRecord::Schema.define(version: 20160115185456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20160115170953) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "what"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -38,12 +40,14 @@ ActiveRecord::Schema.define(version: 20160115170953) do
     t.boolean  "assigned"
     t.integer  "assignee_id"
     t.string   "business_name"
-    t.string   "street"
+    t.string   "address"
     t.string   "city"
     t.string   "state"
     t.integer  "zip"
     t.string   "what"
     t.string   "icon"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "todos", ["user_id"], name: "index_todos_on_user_id", using: :btree

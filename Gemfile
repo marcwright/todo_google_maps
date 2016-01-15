@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'geocoder'
 gem 'httparty'
 gem 'underscore-rails'
 gem 'bootstrap-generators', '~> 3.3.4'
