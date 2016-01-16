@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'twilio-ruby', '~> 4.2.1'
+gem 'awesome_print'
 gem 'geocoder'
 gem 'httparty'
 gem 'underscore-rails'

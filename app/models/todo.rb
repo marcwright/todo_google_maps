@@ -1,3 +1,6 @@
+require 'rubygems' # not necessary with ruby 1.9 but included for completeness
+require 'twilio-ruby'
+
 class Todo < ActiveRecord::Base
   belongs_to :user
   belongs_to :assignee
@@ -20,7 +23,26 @@ class Todo < ActiveRecord::Base
     todo_coords_array
   end
 
-
+def self.send_sms
+  account_sid = "ACd0fe6ab58f7a1dfd036c079a005b1690"
+  auth_token = "47db4a524c214b92162d904b06eb2736"
+  client = Twilio::REST::Client.new account_sid, auth_token
+   
+  from = "+12056701332" # Your Twilio number
+   
+  friends = {
+    "+12054051042" => "Marc",
+    "+19512859866" => "Maren"
+  }
+  friends.each do |key, value|
+    client.account.messages.create(
+      :from => from,
+      :to => key,
+      :body => "Hey #{value}, Monkey party at 6PM. Bring Bananas!"
+    )
+    puts "Sent message to #{value}"
+  end
+end
 
 
   private
