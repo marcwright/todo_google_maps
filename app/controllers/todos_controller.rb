@@ -28,7 +28,9 @@ class TodosController < ApplicationController
   # POST /todos.json
   def create
     @todo = Todo.new(todo_params)
+    assignee_id_to_send_sms = Assignee.find(params[:todo][:assignee_id])
     @todo.user = current_user
+    @todo.send_sms(assignee_id_to_send_sms)
 
     respond_to do |format|
       if @todo.save
