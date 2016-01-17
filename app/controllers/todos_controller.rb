@@ -30,7 +30,7 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
     assignee_id_to_send_sms = Assignee.find(params[:todo][:assignee_id])
     @todo.user = current_user
-    @todo.send_sms(assignee_id_to_send_sms)
+    @todo.send_sms(assignee_id_to_send_sms, params[:todo][:completed])
 
     respond_to do |format|
       if @todo.save
@@ -69,6 +69,8 @@ class TodosController < ApplicationController
 
   def toggle_completed
     @todo.completed = !@todo.completed
+    assignee_id_to_send_sms = Assignee.find(@todo.assignee_id)
+    @todo.send_sms(assignee_id_to_send_sms, @todo.completed)
     respond_to do |format|
       if @todo.save
         format.html { redirect_to todos_path }
