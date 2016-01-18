@@ -1,3 +1,9 @@
+<form class="row" role="search" id="places_form">
+        <div class="form-group col-md-12">
+          <input type="text" id="autocomplete" class="form-control" placeholder="Search">
+        </div>
+      </form>
+
 <div id="map" style='width: 800px; height: 400px;'></div>
 
 <script>
@@ -12,7 +18,8 @@
 
     var map = new google.maps.Map(document.getElementById('map'), {
       center: pos,
-      zoom: 15
+      zoom: 15,
+      styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#6e769e"},{"visibility":"on"}]}]
     });
 
     var coords = <%= @coords_array.to_json.html_safe %>
@@ -75,8 +82,18 @@
                           'Error: Your browser doesn\'t support geolocation.');
   }
 
+
+$("input").geocomplete();
+
+// Trigger geocoding request.
+$("button.find").click(function(){
+  $("input").trigger("geocode");
+  console.log(this)
+});
+
+
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY&signed_in=true&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMxa7ucqwX08z6wLjiuAj_YdCtTnXjWYY&signed_in=true&callback=initMap&libraries=places"
   async defer>
 </script>
