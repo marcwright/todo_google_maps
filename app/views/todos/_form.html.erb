@@ -20,8 +20,22 @@
   </div>
   <div class="form-group">
     <%= f.label :due_date, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
+    <div class="col-sm-2">
       <%= f.date_field :due_date, class: "form-control" %>
+    </div>
+    <%= f.label :assignee, class: "col-sm-1 control-label" %>
+    <div class="col-sm-2">
+  <%= f.collection_select :assignee_id, Assignee.all, :id, :name, :prompt => true %>
+    </div>
+
+    <%= f.label :completed, class: "col-sm-1 control-label" %>
+    <div class="col-sm-1">
+      <%= f.check_box :completed, class: "form-control" %>
+    </div>
+
+    <%= f.label :assigned, class: "col-sm-1 control-label" %>
+    <div class="col-sm-1">
+      <%= f.check_box :assigned, class: "form-control" %>
     </div>
   </div>
  <!--  <div class="form-group">
@@ -30,48 +44,42 @@
       <%= f.check_box :completed, class: "form-control" %>
     </div>
   </div> -->
-  <div class="form-group">
-    <%= f.label :assignee, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-  <%= f.collection_select :assignee_id, Assignee.all, :id, :name, :prompt => true %>
-    </div>
-  </div>
 <!--   <div class="form-group">
     <%= f.label :assigned, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%= f.check_box :assigned, class: "form-control" %>
     </div>
   </div> -->
-  <div class="form-group">
+  <!-- <div class="form-group">
     <%= f.label :pac_input, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%= f.text_field :business_name, id: "autocomplete", class: "form-control" %>
     </div>
-  </div>
+  </div> -->
+
   <div class="form-group">
     <%= f.label :address, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
+    <div class="col-sm-5">
       <%= f.text_field :address, class: "form-control" %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :city, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
+
+    <%= f.label :city, class: "col-sm-1 control-label" %>
+    <div class="col-sm-2">
       <%= f.text_field :city, class: "form-control" %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :state, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
+
+    <%= f.label :state, class: "col-sm-1 control-label" %>
+    <div class="col-sm-1">
       <%= f.text_field :state, class: "form-control" %>
-    </div>
+    </div>    
   </div>
-  <div class="form-group">
+
+  <!--  <div class="form-group">
     <%= f.label :zip, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%= f.number_field :zip, class: "form-control" %>
     </div>
-  </div>
+  </div> -->
   <%= f.hidden_field :what, value: "todo" %>
    
 
