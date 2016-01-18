@@ -13,17 +13,19 @@
 // locate you.
 
   function initMap() {
-
     var pos;
-
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var mapOptions = {
       center: pos,
       zoom: 15,
       styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#6e769e"},{"visibility":"on"}]}]
-    });
+    };
 
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    //pulling in assignee and todo coords from database
     var coords = <%= @coords_array.to_json.html_safe %>
     console.log(coords);
+    
       
     var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -73,7 +75,9 @@
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
     }
-  }
+
+    console.log(pos);
+  } //end of initMap function
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -83,13 +87,17 @@
   }
 
 
-$("input").geocomplete();
+// $("input").geocomplete();
 
-// Trigger geocoding request.
-$("button.find").click(function(){
-  $("input").trigger("geocode");
-  console.log(this)
-});
+// // Trigger geocoding request.
+// $("button.find").click(function(){
+//   $("input").trigger("geocode");
+//   console.log(this)
+// });
+
+// Run the initialize function when the window has finished loading.
+// google.maps.event.addDomListener(window, 'load', initMap);
+
 
 
 </script>
