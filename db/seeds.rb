@@ -5,23 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-Todo.destroy_all
-
-Todo.create([
-  {user_id: 1, title: "Get Lunch @ Chipotle", assignee_id: 15, address: "718 Ponce de Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
-  {user_id: 1, title: "Get Krispy Cremes", assignee_id: 16, address: "295 Ponce De Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
-  {user_id: 1, title: "Pick up Diesel at Barking Hound", assignee_id: 17, address: "765 North Avenue NE", city: "Atlanta", state: "GA", what: "todo"}
-  ])
-
-
 Assignee.destroy_all
-
 Assignee.create([
     {name: "Marc", address: "477 Wilmer St NE", city: "Atlanta", state: "GA", what: "assignee"},
     {name: "Maren", address: "695 North Avenue NE", city: "Atlanta", state: "GA", what: "assignee"},
     {name: "Katy", address: " 725 Ponce De Leon Ave NE", city: "Atlanta", state: "GA", what: "assignee"}
+   ])
 
-
-
+Todo.destroy_all
+Todo.create([
+  {user_id: 1, business_name: "Chipotle", title: "Get Lunch @ Chipotle", assignee_id: 1, address: "718 Ponce de Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
+  {user_id: 1, business_name: "Krispy Kreme", title: "Get Krispy Cremes", assignee_id: 2, address: "295 Ponce De Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
+  {user_id: 1, business_name: "Barking Hound Lofts", title: "Pick up Diesel at Barking Hound", assignee_id: 3, address: "765 North Avenue NE", city: "Atlanta", state: "GA", what: "todo"}
   ])

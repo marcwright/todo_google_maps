@@ -1,10 +1,10 @@
-<form class="row" role="search" id="places_form">
+<!-- <form class="row" role="search" id="places_form">
   <div class="form-group col-md-12">
     <input type="text" id="autocomplete" class="form-control" placeholder="Search">
   </div>
-</form>
+</form> -->
 
-<div id="map" style='width: 800px; height: 400px;'></div>
+<div id="map" style='width: 800px; height: 500px;'></div>
 
 <script>
 // Note: This example requires that you consent to location sharing when
@@ -16,7 +16,7 @@
     var pos;
     var mapOptions = {
       center: pos,
-      zoom: 15,
+      zoom: 14,
       styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#6e769e"},{"visibility":"on"}]}]
     };
 
@@ -24,9 +24,7 @@
 
     //pulling in assignee and todo coords from database
     var coords = <%= @coords_array.to_json.html_safe %>
-    console.log(coords);
-
-      
+       
     var infoWindow = new google.maps.InfoWindow({map: map});
 
     for (var i = 0; i < coords.length; i++) {
@@ -34,26 +32,30 @@
         var myLatlng = new google.maps.LatLng(data.lat, data.lng);
         var icon_color;
 
-           if (data.what == "assignee") {
-               icon_color = "assets/images/marc_pic30.JPG"
-            } else {
-               icon_color = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png' 
-            };            
+         if (data.what == "assignee") {
+            icon_color = data.assignee_img_url
+          } else if (data.completed == true) {
+            icon_color = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
+          } else {
+            icon_color = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' 
+          };            
 
         var marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
             title: data.name,
-            assignee: data.assignee_id,
+            assignee: data.assignee_name,
             businessName: data.business_name,
-            icon: icon_color
+            icon: icon_color,
+            completed: data.completed
         });
-          
+
+        console.log(marker);
         //Attach click event to the marker.
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                infoWindow.setContent("<div style = 'width:200px;min-height:40px;color:black'>" + data.name + "<br>" + data.assignee_id + "<br>" + data.business_name + "</div>");
+                infoWindow.setContent("<div style = 'width:150px;min-height:40px;color:black'><strong>" + data.business_name + "</strong><br>Todo: " + data.name + "<br>Assignee: <img src='" + data.img_url + "'><br>Completed: " + data.completed + "</div>");
                 infoWindow.open(map, marker);
             });
         })(marker, data);
@@ -68,7 +70,7 @@
         };
 
         infoWindow.setPosition(pos);
-        infoWindow.setContent("<div style = 'width:75px;min-height:10px;color:black'>You are Here</div>");
+        infoWindow.setContent("<div style = 'width:45px;min-height:10px;color:black'>Here</div>");
         map.setCenter(pos);
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());

@@ -71,6 +71,6 @@ class AssigneesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignee_params
-      params.require(:assignee).permit(:name, :address, :city, :state, :zip, :phone, :what)
+      params.require(:assignee).permit(:name, :address, :city, :state, :zip, :phone, :what, :img_url)
     end
 end

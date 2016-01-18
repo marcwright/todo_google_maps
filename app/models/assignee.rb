@@ -12,7 +12,7 @@ class Assignee < ActiveRecord::Base
     assignee_coords_array = []
 
     assignees.each do |assignee|
-      assignee_coords_array << {"lat" => assignee.latitude, "lng" => assignee.longitude, "name" => assignee.name, "what" => assignee.what}      
+      assignee_coords_array << {"lat" => assignee.latitude, "lng" => assignee.longitude, "name" => assignee.name, "what" => assignee.what, "assignee_img_url" => assignee.img_url}      
     end
     
     assignee_coords_array

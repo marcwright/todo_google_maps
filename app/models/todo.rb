@@ -1,6 +1,3 @@
-require 'rubygems' # not necessary with ruby 1.9 but included for completeness
-require 'twilio-ruby'
-
 class Todo < ActiveRecord::Base
   belongs_to :user
   belongs_to :assignee
@@ -17,7 +14,7 @@ class Todo < ActiveRecord::Base
     todo_coords_array = []
 
     todos.each do |todo|
-      todo_coords_array << {"lat" => todo.latitude, "lng" => todo.longitude, "name" => todo.title, "what" => todo.what, "assignee_id" => (Assignee.find(18)).name, "business_name" => todo.business_name }      
+      todo_coords_array << {"lat" => todo.latitude, "lng" => todo.longitude, "name" => todo.title, "what" => todo.what, "business_name" => todo.business_name, "img_url" => (Assignee.find(todo.assignee_id)).img_url, "completed" => todo.completed }      
     end
     
     todo_coords_array
