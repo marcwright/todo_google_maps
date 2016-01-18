@@ -151,9 +151,7 @@
         }));
         marker.setVisible(true);
 
-        infowindow.setContent('<div style="color:black"><strong>' + place.name + '</strong><br>' +
-            'Place ID: ' + place.place_id + '<br>' +
-            place.formatted_address + '</div>');
+        infowindow.setContent('<div style="color:black"><strong>' + place.name + '</strong><br>' + place.formatted_address + '</div>');
         infowindow.open(map, marker);
       });
 

@@ -55,7 +55,7 @@
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                infoWindow.setContent("<div style = 'width:150px;min-height:40px;color:black'><strong>" + data.business_name + "</strong><br>Todo: " + data.name + "<br>Assignee: <img src='" + data.img_url + "'><br>Completed: " + data.completed + "</div>");
+                infoWindow.setContent("<div style = 'width:150px;min-height:40px;color:black'><strong>" + data.business_name + "</strong><br><em>" + data.name + "</em><br>Assignee: <img src='" + data.img_url + "'><br>Completed: " + data.completed + "</div>");
                 infoWindow.open(map, marker);
             });
         })(marker, data);
