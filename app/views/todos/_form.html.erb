@@ -20,12 +20,13 @@
   </div>
   <div class="form-group">
     <%= f.label :due_date, class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <%= f.date_field :due_date, class: "form-control" %>
     </div>
+    
     <%= f.label :assignee, class: "col-sm-1 control-label" %>
     <div class="col-sm-2">
-  <%= f.collection_select :assignee_id, Assignee.all, :id, :name, :prompt => true %>
+      <%= f.collection_select :assignee_id, Assignee.all, :id, :name, :prompt => true %>
     </div>
 
     <%= f.label :completed, class: "col-sm-1 control-label" %>
@@ -38,18 +39,6 @@
       <%= f.check_box :assigned, class: "form-control" %>
     </div>
   </div>
- <!--  <div class="form-group">
-    <%= f.label :completed, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.check_box :completed, class: "form-control" %>
-    </div>
-  </div> -->
-<!--   <div class="form-group">
-    <%= f.label :assigned, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.check_box :assigned, class: "form-control" %>
-    </div>
-  </div> -->
   <!-- <div class="form-group">
     <%= f.label :pac_input, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
@@ -60,7 +49,7 @@
   <div class="form-group">
     <%= f.label :address, class: "col-sm-2 control-label" %>
     <div class="col-sm-5">
-      <%= f.text_field :address, class: "form-control" %>
+      <%= f.text_field :address, id: "todoAddress", class: "form-control" %>
     </div>
 
     <%= f.label :city, class: "col-sm-1 control-label" %>
@@ -73,16 +62,7 @@
       <%= f.text_field :state, class: "form-control" %>
     </div>    
   </div>
-
-  <!--  <div class="form-group">
-    <%= f.label :zip, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.number_field :zip, class: "form-control" %>
-    </div>
-  </div> -->
   <%= f.hidden_field :what, value: "todo" %>
-   
-
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit class: "btn btn-primary" %>
@@ -91,11 +71,10 @@
 <% end %>
 
 <form class="row" role="search">
-        <div class="form-group col-md-12">
-          <input type="text" id="pac-input" class="form-control" placeholder="Search">
-        </div>
-      </form>
-
+  <div class="form-group col-md-12">
+    <input type="text" id="pac-input" class="form-control" placeholder="Search">
+  </div>
+</form>
 
 <div id="map" style='width: 800px; height: 400px;'></div>
 
@@ -139,6 +118,10 @@
       google.maps.event.addListener(autocomplete, 'place_changed', function() {
         infowindow.close();
         var place = autocomplete.getPlace();
+        console.log(place);
+
+        $('#todoAddress').val(place.formatted_address);
+
         if (!place.geometry) {
           return;
         }
@@ -147,7 +130,7 @@
           map.fitBounds(place.geometry.viewport);
         } else {
           map.setCenter(place.geometry.location);
-          map.setZoom(15);
+          map.setZoom(13);
         }
 
         // Set the position of the marker using the place ID and location.
@@ -165,6 +148,8 @@
 
    
     var infoWindowCurrent = new google.maps.InfoWindow({map: map});
+    
+
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -174,7 +159,7 @@
         };
 
         infoWindowCurrent.setPosition(pos);
-        infoWindowCurrent.setContent("<div style = 'width:75px;min-height:10px;color:black'>You are Here</div>");
+        infoWindowCurrent.setContent("<div style = 'width:30px;min-height:5px;color:black'>Here</div>");
         map.setCenter(pos);
       }, function() {
         handleLocationError(true, infoWindowCurrent, map.getCenter());
@@ -193,10 +178,6 @@
                           'Error: The Geolocation service failed.' :
                           'Error: Your browser doesn\'t support geolocation.');
   }
-
-
-
-
 
 </script>
 
