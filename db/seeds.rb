@@ -9,9 +9,9 @@
 Todo.destroy_all
 
 Todo.create([
-  {user_id: 2, title: "Get Lunch @ Chipotle", assignee_id: 1, address: "718 Ponce de Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
-  {user_id: 2, title: "Get Krispy Cremes", assignee_id: 3, address: "295 Ponce De Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
-  {user_id: 2, title: "Pick up Diesel at Barking Hound", assignee_id: 3, address: "765 North Avenue NE", city: "Atlanta", state: "GA", what: "todo"}
+  {user_id: 1, title: "Get Lunch @ Chipotle", assignee_id: 8, address: "718 Ponce de Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
+  {user_id: 1, title: "Get Krispy Cremes", assignee_id: 9, address: "295 Ponce De Leon Ave NE", city: "Atlanta", state: "GA", what: "todo"},
+  {user_id: 1, title: "Pick up Diesel at Barking Hound", assignee_id: 10, address: "765 North Avenue NE", city: "Atlanta", state: "GA", what: "todo"}
   ])
 
 

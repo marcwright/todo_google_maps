@@ -14,10 +14,33 @@
 
   <div class="form-group">
     <%= f.label :title, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
+    <div class="col-sm-5">
       <%= f.text_field :title, class: "form-control" %>
     </div>
+
+    <%= f.label :business_name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.text_field :business_name, id: "todoBusinessName", class: "form-control" %>
+    </div>
   </div>
+
+  <div class="form-group">
+    <%= f.label :address, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :address, id: "todoAddress", class: "form-control" %>
+    </div>
+
+    <%= f.label :city, class: "col-sm-1 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :city, id: "todoCity", class: "form-control" %>
+    </div>
+
+    <%= f.label :state, class: "col-sm-1 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :state, id: "todoState", class: "form-control" %>
+    </div>    
+  </div>
+  
   <div class="form-group">
     <%= f.label :due_date, class: "col-sm-2 control-label" %>
     <div class="col-sm-3">
@@ -46,22 +69,6 @@
     </div>
   </div> -->
 
-  <div class="form-group">
-    <%= f.label :address, class: "col-sm-2 control-label" %>
-    <div class="col-sm-5">
-      <%= f.text_field :address, id: "todoAddress", class: "form-control" %>
-    </div>
-
-    <%= f.label :city, class: "col-sm-1 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :city, class: "form-control" %>
-    </div>
-
-    <%= f.label :state, class: "col-sm-1 control-label" %>
-    <div class="col-sm-1">
-      <%= f.text_field :state, class: "form-control" %>
-    </div>    
-  </div>
   <%= f.hidden_field :what, value: "todo" %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -89,6 +96,7 @@
     var mapOptions = {
       center: pos,
       zoom: 15,
+      disableDefaultUI: true,
       styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.bus","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit.station.rail","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#6e769e"},{"visibility":"on"}]}]
     };
 
@@ -120,7 +128,10 @@
         var place = autocomplete.getPlace();
         console.log(place);
 
-        $('#todoAddress').val(place.formatted_address);
+        $('#todoAddress').val(place.address_components[0].long_name + place.address_components[1].long_name );
+        $('#todoCity').val(place.address_components[2].long_name);
+        $('#todoState').val(place.address_components[3].short_name);
+        $('#todoBusinessName').val(place.name);
 
         if (!place.geometry) {
           return;
@@ -169,7 +180,6 @@
       handleLocationError(false, infoWindowCurrent, map.getCenter());
     }
 
-    console.log(pos);
   } //end of initMap function
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {

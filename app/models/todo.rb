@@ -17,7 +17,7 @@ class Todo < ActiveRecord::Base
     todo_coords_array = []
 
     todos.each do |todo|
-      todo_coords_array << {"lat" => todo.latitude, "lng" => todo.longitude, "name" => todo.title, "what" => todo.what}      
+      todo_coords_array << {"lat" => todo.latitude, "lng" => todo.longitude, "name" => todo.title, "what" => todo.what, "assignee_id" => (Assignee.find(18)).name, "business_name" => todo.business_name }      
     end
     
     todo_coords_array

@@ -25,7 +25,7 @@
     //pulling in assignee and todo coords from database
     var coords = <%= @coords_array.to_json.html_safe %>
     console.log(coords);
-    
+
       
     var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -44,6 +44,8 @@
             position: myLatlng,
             map: map,
             title: data.name,
+            assignee: data.assignee_id,
+            businessName: data.business_name,
             icon: icon_color
         });
           
@@ -51,7 +53,7 @@
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                infoWindow.setContent("<div style = 'width:200px;min-height:40px;color:black'>" + data.name + "</div>");
+                infoWindow.setContent("<div style = 'width:200px;min-height:40px;color:black'>" + data.name + "<br>" + data.assignee_id + "<br>" + data.business_name + "</div>");
                 infoWindow.open(map, marker);
             });
         })(marker, data);
