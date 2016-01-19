@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'figaro'
 gem 'twilio-ruby', '~> 4.2.1'
 gem 'awesome_print'
 gem 'geocoder'

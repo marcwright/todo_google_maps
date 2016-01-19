@@ -21,8 +21,8 @@ class Todo < ActiveRecord::Base
   end
 
 def send_sms(assignee_id_name, completed)
-  account_sid = "ACd0fe6ab58f7a1dfd036c079a005b1690"
-  auth_token = "47db4a524c214b92162d904b06eb2736"
+  account_sid = ENV["TWILIO_ACCOUNT_SID"]
+  auth_token = ENV["TWILIO_AUTH_TOKEN"]
   client = Twilio::REST::Client.new account_sid, auth_token
    
   from = "+12056701332" # Your Twilio number
