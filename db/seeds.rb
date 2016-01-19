@@ -10,7 +10,7 @@ Assignee.create([
     {name: "Marc", address: "477 Wilmer St NE", city: "Atlanta", state: "GA", what: "assignee", img_url: "assets/images/marc_pic30.jpg"},
     {name: "Maren", address: "1045 North Highland Avenue NE", city: "Atlanta", state: "GA", what: "assignee", img_url: "assets/images/maren_pic30.jpg"},
     {name: "Katy", address: "1045 Piedmont Ave NE", city: "Atlanta", state: "GA", what: "assignee", img_url: "assets/images/katy_pic30.jpg"},
-    {name: "Schmitty", address: "255 5th St NW", city: "Atlanta", state: "GA", what: "assignee", img_url: "assets/images/katy_pic30.jpg"}
+    {name: "Schmitty", address: "61 North Avenue NW", city: "Atlanta", state: "GA", what: "assignee", img_url: "assets/images/katy_pic30.jpg"}
    ])
 
 Todo.destroy_all

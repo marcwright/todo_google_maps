@@ -6,6 +6,7 @@ class AssigneesController < ApplicationController
   def index
     @assignees = Assignee.all
     @coords_array = (Assignee.get_assignee_coords).concat(Todo.get_todo_coords)
+    @assignee_coords_array = Assignee.get_assignee_coords
   end
 
   # GET /assignees/1

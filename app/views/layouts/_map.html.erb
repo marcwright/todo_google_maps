@@ -33,15 +33,22 @@
             icon_color = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
           } else {
             icon_color = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' 
-          };            
+          };
+
+        var icon = {
+            url: icon_color, // url
+            scaledSize: new google.maps.Size(40, 40), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };              
 
         var marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
-            title: data.name,
+            todo_title: data.name,
             assignee: data.assignee_name,
             businessName: data.business_name,
-            icon: icon_color,
+            icon: icon,
             completed: data.completed
         });
 
@@ -50,7 +57,7 @@
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                infoWindow.setContent("<div style = 'width:150px;min-height:40px;color:black'><strong>" + data.business_name + "</strong><br><em>" + data.name + "</em><br>Assignee: <img src='" + data.img_url + "'><br>Completed: " + data.completed + "</div>");
+                infoWindow.setContent("<div style = 'width:150px;min-height:40px;color:black'><strong>" + marker.businessName + "</strong><br><em>" + marker.todo_title + "</em><br>Assignee: <img src='" + data.img_url + "'><br>Completed: " + marker.completed + "</div>");
                 infoWindow.open(map, marker);
             });
         })(marker, data);
@@ -64,8 +71,21 @@
           lng: position.coords.longitude
         };
 
-        infoWindow.setPosition(pos);
-        infoWindow.setContent("<div style = 'width:45px;min-height:10px;color:black'>Here</div>");
+        var icon = {
+            url: "assets/images/staricon.gif", // url
+            scaledSize: new google.maps.Size(40, 40), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+        var currentMarker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            icon: icon
+        });
+
+        // infoWindow.setPosition(pos);
+        // infoWindow.setContent("<div style = 'width:45px;min-height:10px;color:black'>Here</div>");
         map.setCenter(pos);
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
