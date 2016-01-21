@@ -17,6 +17,8 @@ Bundler.require(*Rails.groups)
 
 module TodoAppAuth
   class Application < Rails::Application
+    require 'figaro'
+    Figaro.load
 
     config.generators do |g|
       g.orm             :active_record

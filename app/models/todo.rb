@@ -45,6 +45,27 @@ def send_sms(assignee_id_name, completed)
   end
 end
 
+def self.get_sms
+  account_sid = ENV["TWILIO_ACCOUNT_SID"]
+  auth_token = ENV["TWILIO_AUTH_TOKEN"]
+  client = Twilio::REST::Client.new account_sid, auth_token
+   
+  # Get an object from its sid. If you do not have a sid,
+  # check out the list resource examples on this page
+  # message = client.account.messages.get("SMc34f161d6b5ef453fce9a957ec5e2288")
+  # client.account.messages.list.each do |message|
+  #   puts message.date_sent
+  # end
+
+  message = client.account.messages.list[4]
+  puts message.body
+  t = Todo.last
+  
+  if message.body == 'D'
+    t.update_attributes(completed: true)
+  end
+end
+
 
   private
 
