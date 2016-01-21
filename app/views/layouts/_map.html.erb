@@ -55,11 +55,21 @@
         console.log(marker);
         //Attach click event to the marker.
         (function (marker, data) {
+          if (marker.businessName === undefined) {
+          google.maps.event.addListener(marker, "click", function (e) {
+                //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                infoWindow.setContent("<div style='width:50px;min-height:40px;color:black'><strong>" + marker.todo_title + "</strong></div>");
+                infoWindow.open(map, marker);
+            });
+        } else {
+
+
             google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
                 infoWindow.setContent("<div style='width:150px;min-height:40px;color:black'><strong>" + marker.businessName + "</strong><br><em>" + marker.todo_title + "</em><br>Assignee: <img style='width:30px;height:30px' src='" + data.img_url + "'><br>Completed: " + marker.completed + "</div>");
                 infoWindow.open(map, marker);
             });
+          }
         })(marker, data);
       }
 
