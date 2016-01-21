@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
+       UsersMailer.welcome_email(@user).deliver_now
       if @user.save
         sign_in @user
         format.html { redirect_to root_path, notice: 'Welcome!' }

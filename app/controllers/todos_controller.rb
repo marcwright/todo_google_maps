@@ -34,6 +34,7 @@ class TodosController < ApplicationController
     @todo.send_sms(assignee_id_to_send_sms, params[:todo][:completed])
 
     respond_to do |format|
+
       if @todo.save
         format.html { redirect_to todos_path, notice: 'Todo was successfully created.' }
         format.json { render :show, status: :created, location: @todo }

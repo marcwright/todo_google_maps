@@ -49,16 +49,16 @@
             assignee: data.assignee_name || ' ',
             businessName: data.business_name || ' ' ,
             icon: icon,
-            completed: data.completed || ' '
+            completed: data.completed,
+            what: data.what
         });
 
-        console.log(marker);
         //Attach click event to the marker.
         (function (marker, data) {
-          if (marker.businessName === undefined) {
+          if (marker.what == "assignee") {
           google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                infoWindow.setContent("<div style='width:50px;min-height:40px;color:black'><strong>" + marker.todo_title + "</strong></div>");
+                infoWindow.setContent("<div style='width:60px;min-height:20px;color:black'><strong>" + marker.todo_title + "</strong></div>");
                 infoWindow.open(map, marker);
             });
         } else {

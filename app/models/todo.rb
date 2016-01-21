@@ -27,22 +27,22 @@ def send_sms(assignee_id_name, completed)
    
   from = "+12056701332" # Your Twilio number
    
-  friends = {
-    "+12054051042" => "Marc"
-    # "+19512859866" => "Maren"
-  }
+  # friends = {
+  #   "+12054051042" => "Marc"
+  #   # "+19512859866" => "Maren"
+  # }
   
-  message1 = "by #{ self.due_date } I need you to please... #{ self.title }. Please text 'D' when done. Thx!"
+  message1 = "by #{ self.due_date }, please goto #{ self.business_name } and #{ self.title }. Text 'D' when done. Thx!"
   message2 = "Thank you for #{ self.title }, see you soon!!"
 
-  friends.each do |key, value|
+  # friends.each do |key, value|
     client.account.messages.create(
       :from => from,
-      :to => key,
+      :to => assignee_id_name.phone,
       :body => "Hey #{ assignee_id_name.name }, #{ (completed == true) ? message2 : message1 }"
     )
-    puts "Sent message to #{ value }"
-  end
+    puts "Sent message to #{ assignee_id_name.name  }"
+  # end
 end
 
 def self.get_sms
