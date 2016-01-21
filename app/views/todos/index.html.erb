@@ -23,7 +23,7 @@
     </thead>
 
     <tbody>
-      <% if @todo %>
+      <% if @todos %>
           <%= content_tag_for(:tr, @todos) do |todo| %>
                 <td><%= link_to todo.title, todo %></td>
                 <td><%= todo.due_date %></td>
