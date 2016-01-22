@@ -6,6 +6,9 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
+    c = current_u
+    @user = User.where(email: c)
+    puts c
     @todos = current_user.todos.order(created_at: :desc)
     @coords_array = (Assignee.get_assignee_coords).concat(Todo.get_todo_coords)
   end
