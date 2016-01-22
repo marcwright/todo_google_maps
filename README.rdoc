@@ -16,6 +16,7 @@
 - Google Maps marker changes color if Todo is completed.
 - Twilio sends a text with the Todo and thank you text.
 - Geocode and current location
+- Info Box shows different info for assignee or todo
 
 
 ==Future Features
@@ -23,5 +24,7 @@
 - Real time location tracking
 - The user enters a todo item and the app automatically assigns it to the closest person and picks the most appropriatelocation.
 - App receives a "Done" text and updates the completed field
+- Only see your assignees
+- Create a Todo, but Twilio won't be sent until Assign checkbox is clicked.
 
 

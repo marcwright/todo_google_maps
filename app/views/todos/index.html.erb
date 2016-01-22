@@ -3,7 +3,7 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Todo
   <% end %>
-  <h1>Here are your TODOs</h1>
+  <h1><%= @current_user %> todos</h1>
 </div>
 
 <%#= @cc %>
@@ -15,7 +15,7 @@
         <th>Title</th>
         <th>Due Date</th>
         <th>Completed</th>
-        <th>Assigned</th>
+        <th>Assign It!</th>
         <th>Assignee</th>
         <th>Edit</th>
         <th>Destroy</th>
@@ -52,8 +52,8 @@
                   <%= todo.assignee ? todo.assignee.name : "Assign Someone!" %>
                 </td>
                 
-            <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-            <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_todo_path(todo), class: "btn btn-primary btn-xs" %></td>
+            <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
           <% end %>
       <% else %>
         <td>Create a Todo!</td>
