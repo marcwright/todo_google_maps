@@ -64,7 +64,7 @@
         } else {
 
 
-            google.maps.event.addListener(marker, "click", function (e) {
+          google.maps.event.addListener(marker, "click", function (e) {
                 //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
                 infoWindow.setContent("<div style='width:150px;min-height:40px;color:black'><strong>" + marker.businessName + "</strong><br><em>" + marker.todo_title + "</em><br>Assignee: <img style='width:30px;height:30px' src='" + data.img_url + "'><br>Completed: " + marker.completed + "</div>");
                 infoWindow.open(map, marker);
@@ -105,7 +105,6 @@
       handleLocationError(false, infoWindow, map.getCenter());
     }
 
-    console.log(pos);
   } //end of initMap function
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :todos
   root 'static_pages#home'
   match '/about', to: 'static_pages#about', via: 'get'
-  match 'todos/:id/toggle_completed', to: 'todos#toggle_completed', via: 'get'
+  match 'todos/:id/toggle_completed', to: 'todos#toggle_completed', via: 'get', as: :toggle_completed_todo
   match 'todos/:id/assigned', to: 'todos#assigned', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
