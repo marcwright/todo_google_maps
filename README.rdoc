@@ -6,14 +6,16 @@
 - Snazzy Maps
 - Hidden Fields
 - Twilio
-- 
+- Geocoder gem
 
 ==Features
 - Add a new todo and assign it to an assignee
+- Your Todo index only shows your todos
 - See the Assignee home location on the map
 - Search Google Places to create Todos
 - Google Maps marker changes color if Todo is completed.
 - Twilio sends a text with the Todo and thank you text.
+- Geocode and current location
 
 
 ==Future Features
