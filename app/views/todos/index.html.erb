@@ -28,7 +28,7 @@
       <% if @todos %>
           <%= content_tag_for(:tr, @todos) do |todo| %>
                 <td><%= link_to todo.title, todo %></td>
-                <td><%= todo.due_date %></td>
+                <td><%= todo.due_date || "ASAP" %></td>
                 <td>
                   <%= link_to("/todos/#{todo.id}/toggle_completed") do %>
                     <% if todo.completed %>

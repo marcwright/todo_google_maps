@@ -13,21 +13,34 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :title, class: "col-sm-2 control-label" %>
+    <%= f.label :title, class: "col-sm-1 control-label" %>
     <div class="col-sm-5">
       <%= f.text_field :title, class: "form-control" %>
     </div>
 
-    <%= f.label :business_name, class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
+    <%= f.label :business_name, class: "col-sm-1 control-label" %>
+    <div class="col-sm-5">
       <%= f.text_field :business_name, id: "todoBusinessName", class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :address, class: "col-sm-2 control-label" %>
-    <div class="col-sm-4">
+
+  <%= f.label :due_date, class: "col-sm-1 control-label" %>
+    <div class="col-sm-5">
+      <%= f.date_field :due_date, class: "form-control" %>
+    </div>
+
+    <%= f.label :address, class: "col-sm-1 control-label" %>
+    <div class="col-sm-5">
       <%= f.text_field :address, id: "todoAddress", class: "form-control" %>
+    </div>   
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :assignee, class: "col-sm-1 control-label" %>
+    <div class="col-sm-5">
+      <%= f.collection_select :assignee_id, Assignee.all, :id, :name, :prompt => true %>
     </div>
 
     <%= f.label :city, class: "col-sm-1 control-label" %>
@@ -38,21 +51,9 @@
     <%= f.label :state, class: "col-sm-1 control-label" %>
     <div class="col-sm-2">
       <%= f.text_field :state, id: "todoState", class: "form-control" %>
-    </div>    
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :due_date, class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <%= f.date_field :due_date, class: "form-control" %>
-    </div>
-    
-    <%= f.label :assignee, class: "col-sm-1 control-label" %>
-    <div class="col-sm-2">
-      <%= f.collection_select :assignee_id, Assignee.all, :id, :name, :prompt => true %>
-    </div>
+    </div> 
 
-    <%= f.label :completed, class: "col-sm-1 control-label" %>
+    <!-- <%= f.label :completed, class: "col-sm-1 control-label" %>
     <div class="col-sm-1">
       <%= f.check_box :completed, class: "form-control" %>
     </div>
@@ -60,7 +61,7 @@
     <%= f.label :assigned, class: "col-sm-1 control-label" %>
     <div class="col-sm-1">
       <%= f.check_box :assigned, class: "form-control" %>
-    </div>
+    </div> -->
   </div>
   <!-- <div class="form-group">
     <%= f.label :pac_input, class: "col-sm-2 control-label" %>
@@ -71,7 +72,7 @@
 
   <%= f.hidden_field :what, value: "todo" %>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-1 col-sm-10">
       <%= f.submit class: "btn btn-primary" %>
     </div>
   </div>
