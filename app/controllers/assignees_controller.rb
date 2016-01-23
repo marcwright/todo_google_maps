@@ -1,5 +1,6 @@
 class AssigneesController < ApplicationController
   before_action :set_assignee, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user
 
   # GET /assignees
   # GET /assignees.json

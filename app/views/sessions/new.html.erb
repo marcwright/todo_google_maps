@@ -1,19 +1,25 @@
-<% provide(:title, "Sign in") %>
-<h1>Sign in</h1>
+<div id="home-image"> 
+  <div class="text-center jumbotron jumb">
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(:session, url: sessions_path) do |f| %>
+  <% provide(:title, "Sign in") %>
+  <h1>Sign in</h1>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+  <div class="row">
+    <div class="span6 offset3">
+      <%= form_for(:session, url: sessions_path) do |f| %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
 
-      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-    <% end %>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+        <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+      <% end %>
+
+      <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+  </div>
+
   </div>
 </div>
